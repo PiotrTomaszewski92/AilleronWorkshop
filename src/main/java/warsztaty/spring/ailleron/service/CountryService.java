@@ -9,6 +9,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import warsztaty.spring.ailleron.model.RestResponse;
 import warsztaty.spring.ailleron.model.RootObject;
 
+import java.util.Locale;
+
 @Service
 public class CountryService {
 
@@ -23,7 +25,13 @@ public class CountryService {
     public RestResponse getCountryFromRestApi(String code){
         ResponseEntity<RootObject> rootResponse = getDataFromApi(code);
         if(rootResponse.getStatusCode().is2xxSuccessful()){
-            return rootResponse.getBody().getRestResponse();
+            RestResponse restResponse = rootResponse.getBody().getRestResponse();
+            restResponse.setSayHello(
+                    messageSource.getMessage(
+                            "hello.message",null, Locale.forLanguageTag(code)
+                    )
+            );
+            return restResponse;
         }
         return null;
     }
