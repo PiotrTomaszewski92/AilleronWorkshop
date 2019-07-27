@@ -23,9 +23,8 @@ public class UserService {
 
     public User addUser(User user) {
         Optional<User> userByName = getUserByName(user.getName());
-        if(userByName.isPresent()){
-            throw new UserAlreadyExistException("User already exist");
-        }
+        if(userByName.isPresent())
+            throw new UserAlreadyExistException("User with name "+user.getName()+" already exist");
         users.add(user);
         return user;
     }
