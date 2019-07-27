@@ -9,6 +9,7 @@ import warsztaty.spring.ailleron.model.User;
 import warsztaty.spring.ailleron.service.UserService;
 
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,13 +38,13 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity addUser(@RequestBody User user){
+    public ResponseEntity addUser(@RequestBody @Valid User user){
          userService.addUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity modifyUser(@PathVariable Long id, @RequestBody User user){
+    public ResponseEntity modifyUser(@PathVariable Long id, @RequestBody @Valid User user){
         userService.modifyUser(id,user);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

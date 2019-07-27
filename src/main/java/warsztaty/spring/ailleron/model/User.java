@@ -1,9 +1,18 @@
 package warsztaty.spring.ailleron.model;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
 public class User {
     private Long id;
+
+    @Size(min=2, max=20, message="Name should have min 2 and max 20 characters")
     private String name;
     private String surname;
+
+    @Min(value = 18, message = "Age should be greater than 18")
+    @Max(value = 120, message = "Age should be less than 120")
     private Integer age;
 
     public User(Long id, String name, String surname, Integer age) {
