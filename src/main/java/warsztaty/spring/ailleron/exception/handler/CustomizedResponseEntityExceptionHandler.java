@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import warsztaty.spring.ailleron.exception.UserAlreadyExistException;
 import warsztaty.spring.ailleron.exception.UserNotFoundException;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @ControllerAdvice
@@ -36,9 +37,10 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-
+        ArrayList<String> errors = new ArrayList<>();
+        ex.getBindingResult().getFieldErrors().forEach(e->errors.add(errors.size() + 1 + ": "+ e.getDefaultMessage()));
         ExceptionResponse validationFailed=
-                new ExceptionResponse(new Date(),"Validation failed", ex.getBindingResult().getAllErrors().toString());
+                new ExceptionResponse(new Date(),"Validation failed", errors.toString());
         return new ResponseEntity<>(validationFailed, HttpStatus.BAD_REQUEST);
     }
 }
