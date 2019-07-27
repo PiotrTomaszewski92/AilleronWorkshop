@@ -14,7 +14,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min=2, max=20, message="Name should have min 2 and max 20 characters")
+    @Size(min=2, max=20, message="{user.info.name}")
     private String name;
     private String surname;
 
