@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import warsztaty.spring.ailleron.exception.UserAlreadyExistException;
 import warsztaty.spring.ailleron.model.User;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -11,11 +12,13 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    static List<User> users = Arrays.asList(
-            new User("Mariusz","Chrusciel",19),
-            new User("Piotr","Tomaszewski",25),
-            new User("Aleksander","Kwasniewskich",65)
-    );
+    static List<User> users = new ArrayList<>();
+
+   public UserService(){
+        users.add(new User("Mariusz","Chrusciel",19));
+        users.add(new User("Piotr","Tomaszewski",25));
+        users.add(new User("Aleksander","Kwasniewskich",65));
+    }
 
     public Optional<User> getUserByName(final String name){
         return users.stream().filter( u -> u.getName().equals(name)).findFirst();
