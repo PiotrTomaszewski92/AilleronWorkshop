@@ -3,6 +3,7 @@ package warsztaty.spring.ailleron.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import warsztaty.spring.ailleron.exception.UserNotFoundException;
 
 @RestController
 public class UserController {
@@ -13,6 +14,6 @@ public class UserController {
             return "Chruściel";
         else if("Piotr".equals(name))
             return "Tomaszewski";
-        return "";
+        throw new UserNotFoundException("User with name "+name+" not found.");
     }
 }
