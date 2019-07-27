@@ -31,6 +31,7 @@ public class UserService {
         Optional<User> userByName = getUserByName(user.getName());
         if(userByName.isPresent())
             throw new UserAlreadyExistException("User with name "+user.getName()+" already exist");
+        user.setId((long) (users.size()+1));
         users.add(user);
         return user;
     }
@@ -43,6 +44,7 @@ public class UserService {
         Optional<User> userById =  users.stream().filter(u-> u.getId().equals(id)).findFirst();
         if(!userById.isPresent())
             throw new UserNotFoundException("User with id: "+id+" not foud");
+        user.setId(id);
         users.remove(userById.get());
         users.add(user);
     }

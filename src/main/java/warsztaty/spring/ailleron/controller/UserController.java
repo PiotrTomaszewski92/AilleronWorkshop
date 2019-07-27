@@ -43,4 +43,7 @@ public class UserController {
     public void modifyUser(@PathVariable Long id, @RequestBody User user){
         userService.modifyUser(id,user);
     }
+
+
+
 }
