@@ -1,6 +1,8 @@
 package warsztaty.spring.ailleron.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import warsztaty.spring.ailleron.exception.UserNotFoundException;
 import warsztaty.spring.ailleron.model.User;
@@ -35,13 +37,15 @@ public class UserController {
     }
 
     @PostMapping
-    public User addUser(@RequestBody User user){
-        return userService.addUser(user);
+    public ResponseEntity addUser(@RequestBody User user){
+         userService.addUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{id}")
-    public void modifyUser(@PathVariable Long id, @RequestBody User user){
+    public ResponseEntity modifyUser(@PathVariable Long id, @RequestBody User user){
         userService.modifyUser(id,user);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @DeleteMapping("/{id}")
