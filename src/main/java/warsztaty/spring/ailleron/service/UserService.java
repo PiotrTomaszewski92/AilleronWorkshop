@@ -1,6 +1,7 @@
 package warsztaty.spring.ailleron.service;
 
 import org.springframework.stereotype.Service;
+import warsztaty.spring.ailleron.exception.UserAlreadyExistException;
 import warsztaty.spring.ailleron.model.User;
 
 import java.util.Arrays;
@@ -20,4 +21,12 @@ public class UserService {
         return users.stream().filter( u -> u.getName().equals(name)).findFirst();
     }
 
+    public User addUser(User user) {
+        Optional<User> userByName = getUserByName(user.getName());
+        if(userByName.isPresent()){
+            throw new UserAlreadyExistException("User already exist");
+        }
+        users.add(user);
+        return user;
+    }
 }

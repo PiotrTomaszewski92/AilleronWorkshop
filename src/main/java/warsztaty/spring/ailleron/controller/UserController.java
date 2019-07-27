@@ -28,4 +28,8 @@ public class UserController {
             return userByName.get();
         throw new UserNotFoundException("User with name "+name+" not found.");
     }
+
+    public User addUser(User user){
+        return userService.addUser(user);
+    }
 }

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import warsztaty.spring.ailleron.exception.UserAlreadyExistException;
 import warsztaty.spring.ailleron.exception.UserNotFoundException;
 
 import java.util.Date;
@@ -17,5 +18,11 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     public final ResponseEntity handleUserNotFoundException(UserNotFoundException ex, WebRequest request){
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UserAlreadyExistException.class)
+    public final ResponseEntity handleUserAlreadyExistException(UserAlreadyExistException ex, WebRequest request){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(),ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity(exceptionResponse,HttpStatus.CONFLICT);
     }
 }
