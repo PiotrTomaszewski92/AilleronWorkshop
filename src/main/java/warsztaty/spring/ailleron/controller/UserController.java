@@ -38,4 +38,9 @@ public class UserController {
     public User addUser(@RequestBody User user){
         return userService.addUser(user);
     }
+
+    @PutMapping("/{id}")
+    public void modifyUser(@PathVariable Long id, @RequestBody User user){
+        userService.modifyUser(id,user);
+    }
 }

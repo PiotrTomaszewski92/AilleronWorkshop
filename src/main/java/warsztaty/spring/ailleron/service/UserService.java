@@ -2,6 +2,7 @@ package warsztaty.spring.ailleron.service;
 
 import org.springframework.stereotype.Service;
 import warsztaty.spring.ailleron.exception.UserAlreadyExistException;
+import warsztaty.spring.ailleron.exception.UserNotFoundException;
 import warsztaty.spring.ailleron.model.User;
 
 import java.util.ArrayList;
@@ -16,9 +17,9 @@ public class UserService {
 
    public UserService(){
        if(users.isEmpty()) {
-           users.add(new User("Mariusz", "Chrusciel", 19));
-           users.add(new User("Piotr", "Tomaszewski", 25));
-           users.add(new User("Aleksander", "Kwasniewskich", 65));
+           users.add(new User(1L,"Mariusz", "Chrusciel", 19));
+           users.add(new User(2L,"Piotr", "Tomaszewski", 25));
+           users.add(new User(3L,"Aleksander", "Kwasniewskich", 65));
        }
    }
 
@@ -36,5 +37,13 @@ public class UserService {
 
     public List<User> getAllUsers() {
        return users;
+    }
+
+    public void modifyUser(Long id, User user) {
+        Optional<User> userById =  users.stream().filter(u-> u.getId().equals(id)).findFirst();
+        if(!userById.isPresent())
+            throw new UserNotFoundException("User with id: "+id+" not foud");
+        users.remove(userById.get());
+        users.add(user);
     }
 }
