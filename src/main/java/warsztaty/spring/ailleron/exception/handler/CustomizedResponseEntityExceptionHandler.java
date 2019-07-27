@@ -25,4 +25,10 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(),ex.getMessage(), request.getDescription(false));
         return new ResponseEntity(exceptionResponse,HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(Exception.class)      //obsługa nieprzewidzianego wyjatku
+    public final ResponseEntity handleDefaultException(UserAlreadyExistException ex, WebRequest request){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(),ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity(exceptionResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
