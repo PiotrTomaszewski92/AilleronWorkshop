@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import warsztaty.spring.ailleron.exception.UserNotFoundException;
 import warsztaty.spring.ailleron.model.User;
+import warsztaty.spring.ailleron.model.UserList;
 import warsztaty.spring.ailleron.service.UserService;
 
 import javax.annotation.PostConstruct;
@@ -41,8 +42,8 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> gerUser(){
-        return userService.getAllUsers();
+    public UserList gerUsers(){
+        return new UserList(userService.getAllUsers());
     }
 
     @PostMapping

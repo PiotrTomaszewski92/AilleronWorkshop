@@ -17,5 +17,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml' //wysylanie i zwracanie xml
 	runtime 'org.springframework.boot:spring-boot-devtools'
 }
