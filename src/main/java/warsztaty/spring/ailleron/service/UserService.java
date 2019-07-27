@@ -15,10 +15,12 @@ public class UserService {
     static List<User> users = new ArrayList<>();
 
    public UserService(){
-        users.add(new User("Mariusz","Chrusciel",19));
-        users.add(new User("Piotr","Tomaszewski",25));
-        users.add(new User("Aleksander","Kwasniewskich",65));
-    }
+       if(users.isEmpty()) {
+           users.add(new User("Mariusz", "Chrusciel", 19));
+           users.add(new User("Piotr", "Tomaszewski", 25));
+           users.add(new User("Aleksander", "Kwasniewskich", 65));
+       }
+   }
 
     public Optional<User> getUserByName(final String name){
         return users.stream().filter( u -> u.getName().equals(name)).findFirst();
@@ -30,5 +32,9 @@ public class UserService {
             throw new UserAlreadyExistException("User with name "+user.getName()+" already exist");
         users.add(user);
         return user;
+    }
+
+    public List<User> getAllUsers() {
+       return users;
     }
 }

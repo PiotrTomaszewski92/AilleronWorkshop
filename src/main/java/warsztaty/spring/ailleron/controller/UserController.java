@@ -7,6 +7,7 @@ import warsztaty.spring.ailleron.model.User;
 import warsztaty.spring.ailleron.service.UserService;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -26,6 +27,11 @@ public class UserController {
         if(userByName.isPresent())
             return userByName.get();
         throw new UserNotFoundException("User with name "+name+" not found.");
+    }
+
+    @GetMapping
+    public List<User> gerUser(){
+        return userService.getAllUsers();
     }
 
     @PostMapping
