@@ -1,6 +1,7 @@
 package warsztaty.spring.ailleron.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -13,6 +14,9 @@ public class CountryService {
 
     @Autowired
     private RestTemplate restTemplate; // RestTemplate: obiekt do komunikacji sieciowej po restach z metodami http
+
+    @Autowired
+    private MessageSource messageSource;
 
     private final static String COUNTRY_CODE_URL = "http://www.groupkt.com/country/get/iso2code/";
 
