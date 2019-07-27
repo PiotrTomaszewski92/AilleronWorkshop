@@ -41,11 +41,20 @@ public class UserService {
     }
 
     public void modifyUser(Long id, User user) {
-        Optional<User> userById =  users.stream().filter(u-> u.getId().equals(id)).findFirst();
+        Optional<User> userById =  getUserById(id);
         if(!userById.isPresent())
             throw new UserNotFoundException("User with id: "+id+" not foud");
         user.setId(id);
         users.remove(userById.get());
         users.add(user);
+    }
+
+    private Optional<User> getUserById(Long id){
+        return users.stream().filter(u-> u.getId().equals(id)).findFirst();
+    }
+
+    public void deleteUser(Long id) {
+        User userById =  getUserById(id).orElseThrow(()->new UserNotFoundException("User not found"));
+        users.remove(userById);
     }
 }
