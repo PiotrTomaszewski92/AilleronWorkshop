@@ -49,7 +49,7 @@ public class UserService {
         users.add(user);
     }
 
-    private Optional<User> getUserById(Long id){
+    public Optional<User> getUserById(Long id){
         return users.stream().filter(u-> u.getId().equals(id)).findFirst();
     }
 

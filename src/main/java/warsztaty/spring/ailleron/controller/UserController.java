@@ -32,6 +32,14 @@ public class UserController {
         throw new UserNotFoundException("User with name "+name+" not found.");
     }
 
+    @GetMapping("/{id}")
+    public User getSurnameByName(@PathVariable Long id){
+        Optional<User> userByName = userService.getUserById(id);
+        if(userByName.isPresent())
+            return userByName.get();
+        throw new UserNotFoundException("User with id "+id+" not found.");
+    }
+
     @GetMapping
     public List<User> gerUser(){
         return userService.getAllUsers();
