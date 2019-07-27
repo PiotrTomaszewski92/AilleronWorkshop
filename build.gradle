@@ -18,5 +18,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compile 'org.springframework.boot:spring-boot-starter-web'
 	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml' //wysylanie i zwracanie xml
+
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa'		//h2 config
+	runtime 'com.h2database:h2'			//http://localhost:8080/h2-console/login.jsp
+
 	runtime 'org.springframework.boot:spring-boot-devtools'
 }
